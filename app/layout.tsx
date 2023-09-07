@@ -2,6 +2,7 @@ import Sidebar from '@/components/Sidebar';
 import './globals.css';
 import type { Metadata } from 'next';
 import { Figtree } from 'next/font/google';
+import { PropsWithChildren } from 'react';
 
 const font = Figtree({ subsets: ['latin'] });
 
@@ -10,7 +11,7 @@ export const metadata: Metadata = {
   description: 'Listen to music',
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+const RootLayout: React.FC<PropsWithChildren> = ({ children }) => {
   return (
     <html lang='en'>
       <body className={font.className}>
@@ -18,4 +19,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </body>
     </html>
   );
-}
+};
+
+export default RootLayout;

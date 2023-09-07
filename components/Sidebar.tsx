@@ -1,6 +1,6 @@
 'use client';
 
-import React, { FC, useMemo } from 'react';
+import React, { FC } from 'react';
 import { usePathname } from 'next/navigation';
 import { HiHome } from 'react-icons/hi';
 import { BiSearch } from 'react-icons/bi';
@@ -13,26 +13,21 @@ interface SidebarProps {
   children: React.ReactNode;
 }
 
+const routes = [
+  {
+    icon: HiHome,
+    label: 'Home',
+    href: '/',
+  },
+  {
+    icon: BiSearch,
+    label: 'Search',
+    href: '/search',
+  },
+];
+
 const Sidebar: FC<SidebarProps> = ({ children }) => {
   const pathname = usePathname();
-
-  const routes = useMemo(
-    () => [
-      {
-        icon: HiHome,
-        label: 'Home',
-        active: pathname !== '/search',
-        href: '/',
-      },
-      {
-        icon: BiSearch,
-        label: 'Search',
-        active: pathname === '/search',
-        href: '/search',
-      },
-    ],
-    [pathname]
-  );
 
   return (
     <div className='flex h-full'>
@@ -40,7 +35,7 @@ const Sidebar: FC<SidebarProps> = ({ children }) => {
         <Box>
           <div className='flex flex-col gap-y-4 px-5 py-4'>
             {routes.map(item => (
-              <SidebarItem key={item.label} {...item} />
+              <SidebarItem key={item.label} {...item} active={pathname === '/search'} />
             ))}
           </div>
         </Box>
