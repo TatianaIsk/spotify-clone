@@ -18,8 +18,8 @@ const ModalProvider = () => {
 
   return (
     <>
-      <AuthModal />
-      <UploadModal />
+      {isMounted && <AuthModal />}
+      {isMounted && <UploadModal />}
     </>
   );
 };

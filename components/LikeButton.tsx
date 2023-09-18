@@ -4,6 +4,7 @@ import useAuthModal from '@/hooks/useUploadModal';
 
 import { useUser } from '@/hooks/useUser';
 import { useSessionContext } from '@supabase/auth-helpers-react';
+import error from 'next/error';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
@@ -40,31 +41,26 @@ const LikeButton: React.FC<LikeButtonProps> = ({ songId }) => {
 
   const Icon = isLiked ? AiFillHeart : AiOutlineHeart;
 
-  const handleLike = async () => {
+  const handleLike = async (): Promise<void> => {
     if (!user) {
-      return authModal.onOpen;
+      return authModal.onOpen();
     }
 
-    if (isLiked) {
-      const { error } = await supabaseClient.from('liked_songs').delete().eq('user_id', user.id).eq('song_id', songId);
-
-      if (error) {
-        toast.error(error.message);
-      } else {
+    try {
+      if (isLiked) {
+        await supabaseClient.from('liked_songs').delete().eq('user_id', user.id).eq('song_id', songId);
         setIsLiked(false);
-      }
-    } else {
-      const { error } = await supabaseClient.from('liked_songs').insert({ song_id: songId, user_id: user.id });
-
-      if (error) {
-        toast.error(error.message);
       } else {
+        await supabaseClient.from('liked_songs').insert({ song_id: songId, user_id: user.id });
         setIsLiked(true);
         toast.success('Liked!');
       }
+      router.refresh();
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        toast.error(error.message);
+      }
     }
-
-		router.refresh()
   };
 
   return (
