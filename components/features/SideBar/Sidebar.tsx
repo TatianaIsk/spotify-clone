@@ -6,9 +6,9 @@ import { HiHome } from 'react-icons/hi';
 import { BiSearch } from 'react-icons/bi';
 import { Song } from '@/types';
 
-import Box from './Box';
+import Box from '../../ui/Box/Box';
 import SidebarItem from './SidebarItem';
-import Library from './Library';
+import Library from '../Library/Library';
 import usePlayer from '@/hooks/usePlayer';
 import { twMerge } from 'tailwind-merge';
 

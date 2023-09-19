@@ -1,13 +1,12 @@
 'use client';
 
 import useAuthModal from '@/hooks/useUploadModal';
+import toast from 'react-hot-toast';
 
 import { useUser } from '@/hooks/useUser';
 import { useSessionContext } from '@supabase/auth-helpers-react';
-import error from 'next/error';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import toast from 'react-hot-toast';
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
 
 interface LikeButtonProps {
@@ -17,11 +16,11 @@ interface LikeButtonProps {
 const LikeButton: React.FC<LikeButtonProps> = ({ songId }) => {
   const router = useRouter();
   const { supabaseClient } = useSessionContext();
-
   const authModal = useAuthModal();
   const { user } = useUser();
 
   const [isLiked, setIsLiked] = useState(false);
+  const Icon = isLiked ? AiFillHeart : AiOutlineHeart;
 
   useEffect(() => {
     if (!user?.id) {
@@ -39,8 +38,6 @@ const LikeButton: React.FC<LikeButtonProps> = ({ songId }) => {
     fetchData();
   }, [songId, supabaseClient, user?.id]);
 
-  const Icon = isLiked ? AiFillHeart : AiOutlineHeart;
-
   const handleLike = async (): Promise<void> => {
     if (!user) {
       return authModal.onOpen();
@@ -56,7 +53,7 @@ const LikeButton: React.FC<LikeButtonProps> = ({ songId }) => {
         toast.success('Liked!');
       }
       router.refresh();
-    } catch (error: unknown) {
+    } catch (error) {
       if (error instanceof Error) {
         toast.error(error.message);
       }

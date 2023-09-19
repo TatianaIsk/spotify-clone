@@ -1,6 +1,6 @@
 import getSongsByTitle from '@/actions/getSongsByTitle';
-import Header from '@/components/Header';
-import SearchInput from '@/components/SearchInput';
+import Header from '@/components/ui/Header/Header';
+import SearchInput from '@/components/ui/Input/SearchInput';
 import SearchContent from './components/SearchContent';
 
 interface SearchProps {
@@ -9,7 +9,7 @@ interface SearchProps {
   };
 }
 
-export const revalidate = 0
+export const revalidate = 0;
 
 const Search = async ({ searchParams }: SearchProps) => {
   const songs = await getSongsByTitle(searchParams.title);

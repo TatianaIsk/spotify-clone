@@ -10,7 +10,7 @@ import { useUser } from '@/hooks/useUser';
 import { FaUserAlt } from 'react-icons/fa';
 import { toast } from 'react-hot-toast';
 
-import Button from './Button';
+import Button from '../Button/Button';
 import useAuthModal from '@/hooks/useAuthModal';
 
 interface HeaderProps {
@@ -33,7 +33,7 @@ const Header: React.FC<HeaderProps> = ({ children, className }) => {
     if (error) {
       toast.error(error.message);
     } else {
-      toast.success('Logged out!')
+      toast.success('Logged out!');
     }
   };
 

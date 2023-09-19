@@ -7,10 +7,10 @@ import { useSupabaseClient } from '@supabase/auth-helpers-react';
 import { useRouter } from 'next/navigation';
 
 import uniqid from 'uniqid';
-import useUploadModal from '@/hooks/useAuthModal';
+import useUploadModal from '@/hooks/useUploadModal';
 import Modal from './Modal';
-import Input from './Input';
-import Button from './Button';
+import Input from '../Input/Input';
+import Button from '../Button/Button';
 import toast from 'react-hot-toast';
 
 const UploadModal = () => {

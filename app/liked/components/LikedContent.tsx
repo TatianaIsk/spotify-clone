@@ -1,7 +1,7 @@
 'use client';
 
-import LikeButton from '@/components/LikeButton';
-import MediaItem from '@/components/MediaItem';
+import LikeButton from '@/components/ui/Button/LikeButton';
+import MediaItem from '@/components/features/MediaItem/MediaItem';
 import useOnPlay from '@/hooks/useOnPlay';
 import { useUser } from '@/hooks/useUser';
 import { Song } from '@/types';

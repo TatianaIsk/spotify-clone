@@ -2,11 +2,12 @@
 
 import { TbPlaylist } from 'react-icons/tb';
 import { AiOutlinePlus } from 'react-icons/ai';
-import useAuthModal from '@/hooks/useAuthModal';
 import { useUser } from '@/hooks/useUser';
-import useUploadModal from '@/hooks/useAuthModal';
 import { Song } from '@/types';
-import MediaItem from './MediaItem';
+
+import useAuthModal from '@/hooks/useAuthModal';
+import useUploadModal from '@/hooks/useUploadModal';
+import MediaItem from '../MediaItem/MediaItem';
 import useOnPlay from '@/hooks/useOnPlay';
 
 interface LibraryProps {
